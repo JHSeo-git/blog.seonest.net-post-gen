@@ -1,26 +1,31 @@
 {
-  "name": "blog.seonest.net-post-gen",
+  "name": "seonest-post-gen",
   "version": "0.0.1",
-  "license": "MIT",
   "repository": "https://github.com/JHSeo-git/blog.seonest.net-post-gen.git",
+  "license": "MIT",
   "author": "JHSeo <qnfqnfqnf@gmail.com>",
-  "main": "dist/index.js",
   "type": "module",
+  "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node --esm --transpileOnly src/index.ts",
-    "format": "eslint --fix --ext .ts,.js, --ignore-path .gitignore && prettier --write 'src/**/*.{js,ts}'"
+    "clear": "rimraf dist",
+    "format": "eslint --fix --ext .ts,.js, --ignore-path .gitignore && prettier --write 'src/**/*.{js,ts}'",
+    "start": "pnpm clear && pnpm build && node dist/src/index.js"
   },
   "devDependencies": {
+    "@types/inquirer": "^9.0.1",
     "@types/node": "^18.7.16",
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.2",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
     "chalk": "^5.0.1",
     "commander": "^9.4.0",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-json-format": "^2.0.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "inquirer": "^9.1.1",
     "prettier": "^2.7.1",
-    "ts-node": "^10.9.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.8.3"
   }
 }
