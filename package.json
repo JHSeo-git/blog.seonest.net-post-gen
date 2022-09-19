@@ -1,16 +1,54 @@
 {
   "name": "seonest-post-gen",
   "version": "0.0.1",
+  "keywords": [
+    "markdown",
+    "md",
+    "mdx",
+    "cli",
+    "generator",
+    "frontmatter"
+  ],
   "repository": "https://github.com/JHSeo-git/blog.seonest.net-post-gen.git",
   "license": "MIT",
   "author": "JHSeo <qnfqnfqnf@gmail.com>",
   "type": "module",
-  "main": "dist/src/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "import": {
+          "index.js": "./dist/src/index.js",
+          "types": "./dist/index.d.ts"
+        },
+        "default": {
+          "index.js": "./dist/src/index.js",
+          "types": "./dist/index.d.ts"
+        }
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsc",
     "clear": "rimraf dist",
     "format": "eslint --fix --ext .ts,.js, --ignore-path .gitignore && prettier --write 'src/**/*.{js,ts}'",
     "start": "pnpm clear && pnpm build && node dist/src/index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "cjk-slug": "file:../cjk-slug",
+    "commander": "^9.4.0",
+    "fs-extra": "^10.1.0",
+    "gray-matter": "^4.0.3",
+    "inquirer": "^9.1.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -18,15 +56,10 @@
     "@types/node": "^18.7.16",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
-    "chalk": "^5.0.1",
-    "cjk-slug": "file:../cjk-slug",
-    "commander": "^9.4.0",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-json-format": "^2.0.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
-    "fs-extra": "^10.1.0",
-    "inquirer": "^9.1.1",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.3"

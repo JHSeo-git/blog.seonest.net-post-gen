@@ -1,19 +1,19 @@
+import { log } from 'node:console';
+
 import chalk from 'chalk';
 import { Command } from 'commander';
 
-import type { FrontMatter } from './promts.js';
-import { getPromptThumbnail } from './promts.js';
-import { getPromptCategory, getPromptDescription, getPromptTitle } from './promts.js';
-// import packageJson from '../package.json';
+import packageJson from '../package.json' assert { type: 'json' };
+import type { FrontMatter } from './prompts.js';
+import { getPromptThumbnail } from './prompts.js';
+import { getPromptCategory, getPromptDescription, getPromptTitle } from './prompts.js';
 
 const TARGET_DIR = '__post';
 
 const program = new Command();
 
-program.version('0.0.1');
-program.name(chalk.cyan('seonest-post-gen'));
-// program.version(packageJson.version);
-// program.name(chalk.cyan(packageJson.name));
+program.version(packageJson.version);
+program.name(chalk.cyan(packageJson.name));
 
 program.option('-y', 'initialize using default configuration');
 program.parse();
@@ -37,7 +37,9 @@ async function gen() {
     thumbnail,
   };
 
-  console.log(frontMatter);
+  log(frontMatter);
 }
 
 gen();
+
+export { type FrontMatter };
