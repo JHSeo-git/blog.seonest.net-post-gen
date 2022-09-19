@@ -1,7 +1,10 @@
+import { error, log } from 'node:console';
 import path from 'node:path';
 
+import chalk from 'chalk';
 import slugify from 'cjk-slug';
 import fs from 'fs-extra';
+import matter from 'gray-matter';
 import inquirer from 'inquirer';
 
 const __dirname = process.cwd();
@@ -23,9 +26,9 @@ export type FrontMatter = {
   thumbnail?: string;
 };
 
-const getSlug = (name: string) => {
-  return slugify(name);
-};
+export const ensureDir = (fileDir: string) => fs.ensureDirSync(fileDir);
+
+export const getSlug = (name: string) => slugify(name);
 
 export const getPromptTitle = async (targetDir: string, category: string) => {
   const { title } = await inquirer.prompt([
@@ -148,6 +151,19 @@ export const getPromptThumbnail = async () => {
 };
 
 // TODO: tags
+
+export const generateFrontMatter = (contents: object) => matter.stringify('', contents);
+
+export const generatePost = (filePath: string, contents: string) => {
+  try {
+    fs.writeFileSync(filePath, contents);
+
+    return true;
+  } catch (err) {
+    error(`${chalk.red('Unknown Error: Cannot write file!')}\n\n${JSON.stringify(err, null, 2)}`);
+    return false;
+  }
+};
 
 const getCategories = async (targetDir: string) => {
   const dirPath = path.resolve(__dirname, targetDir);
