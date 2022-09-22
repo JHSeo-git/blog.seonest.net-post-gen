@@ -1,7 +1,7 @@
 import esbuild from 'rollup-plugin-esbuild';
 import json from '@rollup/plugin-json';
 
-const name = require('./package.json').main.replace(/\.c?js$/, '');
+const name = require('./package.json').main.replace(/\.mjs$/, '');
 
 const bundle = (config) => ({
   ...config,
@@ -18,11 +18,11 @@ export default [
       json(),
     ],
     output: [
-      {
-        file: `${name}.js`,
-        format: 'cjs',
-        sourcemap: true,
-      },
+      // {
+      //   file: `${name}.cjs`,
+      //   format: 'cjs',
+      //   sourcemap: true,
+      // },
       {
         file: `${name}.mjs`,
         format: 'es',
