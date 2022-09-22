@@ -1,5 +1,6 @@
 import esbuild from 'rollup-plugin-esbuild';
 import json from '@rollup/plugin-json';
+import shebang from 'rollup-plugin-preserve-shebang';
 
 const name = require('./package.json').main.replace(/\.mjs$/, '');
 
@@ -16,6 +17,7 @@ export default [
         jsx: 'automatic',
       }),
       json(),
+      shebang(),
     ],
     output: [
       // {
