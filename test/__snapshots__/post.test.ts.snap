@@ -1,7 +1,0 @@
-// Vitest Snapshot v1
-
-exports[`seonest-post-gen > snapshot 1`] = `
-{
-  "foo": "bar",
-}
-`;
