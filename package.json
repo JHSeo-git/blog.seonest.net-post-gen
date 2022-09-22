@@ -37,7 +37,7 @@
     "clear": "rimraf dist",
     "format": "eslint --fix --ext .ts,.js, --ignore-path .gitignore && prettier --write 'src/**/*.{js,ts}'",
     "prepack": "pnpm build",
-    "start": "pnpm build && node dist/src/index.js",
+    "start": "pnpm build && node ./dist/src/index.js",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
