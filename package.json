@@ -15,29 +15,33 @@
   "exports": {
     ".": {
       "import": {
-        "index.js": "./dist/src/index.js",
+        "index.js": "./dist/index.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "require": {
+        "index.js": "./dist/index.js",
         "types": "./dist/index.d.ts"
       },
       "default": {
-        "index.js": "./dist/src/index.js",
+        "index.js": "./dist/index.js",
         "types": "./dist/index.d.ts"
       }
-    },
-    "./package.json": "./package.json"
+    }
   },
-  "main": "./dist/src/index.js",
-  "module": "./dist/src/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "source": "./src/index.ts",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "pnpm clear && tsc -p ./tsconfig.build.json",
+    "build": "pnpm clear && rollup -c",
     "clear": "rimraf dist",
+    "dts": "tsc --emitDeclarationOnly -p ./tsconfig.build.json",
     "format": "eslint --fix --ext .ts,.js, --ignore-path .gitignore && prettier --write 'src/**/*.{js,ts}'",
     "prepack": "pnpm build",
-    "start": "pnpm build && node ./dist/src/index.js",
+    "start": "pnpm build && node ./dist/index.mjs",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
@@ -50,18 +54,22 @@
     "inquirer": "^9.1.1"
   },
   "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^9.0.1",
     "@types/node": "^18.7.16",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "@vitest/coverage-c8": "^0.23.4",
+    "esbuild": "^0.15.8",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-json-format": "^2.0.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
+    "rollup": "^2.79.1",
+    "rollup-plugin-esbuild": "^4.10.1",
     "typescript": "^4.8.3",
     "vitest": "^0.23.4"
   }

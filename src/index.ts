@@ -3,7 +3,7 @@ import { error, log } from 'node:console';
 import chalk from 'chalk';
 import { Command } from 'commander';
 
-import packageJson from '../package.json' assert { type: 'json' };
+import packageJson from '../package.json';
 import type { FrontMatter } from './utils.js';
 import { generatePost, getSlug } from './utils.js';
 import {
