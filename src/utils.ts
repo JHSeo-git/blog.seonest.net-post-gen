@@ -1,4 +1,4 @@
-import { error, log } from 'node:console';
+import { error } from 'node:console';
 import path from 'node:path';
 
 import chalk from 'chalk';
@@ -26,7 +26,7 @@ export type FrontMatter = {
   thumbnail?: string;
 };
 
-export const ensureDir = (fileDir: string) => fs.ensureDirSync(fileDir);
+export const ensureDir = (fileDir: string) => fs.ensureDir(fileDir);
 
 export const getSlug = (name: string) => slugify(name);
 
@@ -165,7 +165,7 @@ export const generatePost = (filePath: string, contents: string) => {
   }
 };
 
-const getCategories = async (targetDir: string) => {
+export const getCategories = async (targetDir: string) => {
   const dirPath = path.resolve(__dirname, targetDir);
   const dirs = fs.readdirSync(dirPath);
 
