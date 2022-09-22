@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "chalk": "^5.0.1",
-    "cjk-slug": "file:../cjk-slug",
+    "cjk-slug": "^0.3.0",
     "commander": "^9.4.0",
     "fs-extra": "^10.1.0",
     "gray-matter": "^4.0.3",
