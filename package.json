@@ -36,7 +36,9 @@
     "build": "tsc",
     "clear": "rimraf dist",
     "format": "eslint --fix --ext .ts,.js, --ignore-path .gitignore && prettier --write 'src/**/*.{js,ts}'",
-    "start": "pnpm clear && pnpm build && node dist/src/index.js"
+    "start": "pnpm clear && pnpm build && node dist/src/index.js",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "chalk": "^5.0.1",
@@ -52,12 +54,14 @@
     "@types/node": "^18.7.16",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "@vitest/coverage-c8": "^0.23.4",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-json-format": "^2.0.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.3",
+    "vitest": "^0.23.4"
   }
 }
