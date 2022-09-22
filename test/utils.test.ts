@@ -3,8 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import fse from 'fs-extra';
-import inquirer from 'inquirer';
-import { afterEach, assert, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, assert, beforeEach, describe, it } from 'vitest';
 
 import * as utils from '../src/utils.js';
 
@@ -149,32 +148,6 @@ describe('utils', async () => {
     });
   });
 
-  // getPromptTitle
-  // describe('getPromptTitle', () => {
-  //   const mockTitle = 'title';
-
-  //   beforeEach(() => {
-  //     vi.mock('inquirer', () => {
-  //       return {
-  //         prompt: vi.fn(),
-  //       };
-  //     });
-  //   });
-
-  //   afterEach(() => {
-  //     vi.clearAllMocks();
-  //   });
-  //   it('should return inputed title', async () => {
-  //     const prompts = [{ type: 'input', name: 'title' }];
-  //     const spyPrompt = vi.spyOn(inquirer.prompt, 'prompts', 'get');
-
-  //     utils.getPromptTitle('target/dir', 'category');
-  //   });
-  // });
-  // getPromptDescription
-  // getPromptCategory
-  // getPromptThumbnail
-
   describe('generateFrontMatter', () => {
     describe('when input empty object', () => {
       it('should generate for empty new line string', () => {
@@ -265,4 +238,10 @@ describe('utils', async () => {
       });
     });
   });
+
+  // TODO: inquirer
+  // getPromptTitle
+  // getPromptDescription
+  // getPromptCategory
+  // getPromptThumbnail
 });
