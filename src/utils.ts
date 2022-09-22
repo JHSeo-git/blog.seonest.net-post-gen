@@ -167,6 +167,9 @@ export const generatePost = (filePath: string, contents: string) => {
 
 export const getCategories = async (targetDir: string) => {
   const dirPath = path.resolve(__dirname, targetDir);
+
+  await ensureDir(dirPath);
+
   const dirs = fs.readdirSync(dirPath);
 
   return dirs;

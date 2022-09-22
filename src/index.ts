@@ -61,7 +61,7 @@ async function generator() {
   const fileName = getSlug(title);
   const fileDir = `${targetDir}/${category}`;
 
-  ensureDir(fileDir);
+  await ensureDir(fileDir);
 
   const filePath = `${fileDir}/${fileName}.mdx`;
 

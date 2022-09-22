@@ -1,6 +1,6 @@
 {
   "name": "seonest-post-gen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "seonest",
     "markdown",
@@ -33,11 +33,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm clear && tsc -p ./tsconfig.build.json",
     "clear": "rimraf dist",
     "format": "eslint --fix --ext .ts,.js, --ignore-path .gitignore && prettier --write 'src/**/*.{js,ts}'",
     "prepack": "pnpm build",
-    "start": "pnpm clear && pnpm build && node dist/src/index.js",
+    "start": "pnpm build && node dist/src/index.js",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
