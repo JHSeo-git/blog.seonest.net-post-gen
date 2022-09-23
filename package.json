@@ -1,6 +1,6 @@
 {
   "name": "seonest-post-gen",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "keywords": [
     "seonest",
     "markdown",
@@ -28,6 +28,7 @@
   "module": "./dist/index.mjs",
   "source": "./src/index.ts",
   "types": "./dist/index.d.ts",
+  "bin": "./dist/index.mjs",
   "files": [
     "dist"
   ],
