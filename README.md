@@ -42,4 +42,14 @@ npm run seonest-post-gen
 yarn seonest-post-gen
 ```
 
+**options**
+
+```bash
+# npm
+npm run seonest-post-gen --help
+
+# yarn
+yarn seonest-post-gen --help
+```
+
 ![seonest-post-gen](./__docs/seonest-post-gen.png)

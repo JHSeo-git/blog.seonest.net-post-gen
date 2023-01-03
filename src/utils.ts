@@ -132,6 +132,21 @@ export const getPromptCategory = async (targetDir: string) => {
   return category;
 };
 
+export const getPromptUseAssetDir = async () => {
+  const { useAssetDir } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'useAssetDir',
+      default: () => false,
+      message: 'Could you create asset(image, video, ...etc) directory?',
+    },
+  ]);
+
+  console.log({ useAssetDir });
+
+  return useAssetDir as boolean | undefined;
+};
+
 export const getPromptThumbnail = async () => {
   const { thumbnail } = await inquirer.prompt([
     {
