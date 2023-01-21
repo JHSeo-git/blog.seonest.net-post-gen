@@ -142,8 +142,6 @@ export const getPromptUseAssetDir = async () => {
     },
   ]);
 
-  console.log({ useAssetDir });
-
   return useAssetDir as boolean | undefined;
 };
 
