@@ -63,9 +63,9 @@ async function generator() {
     category,
     title,
     description,
-    draft: false,
-    ...(thumbnail && { thumbnail }),
+    published: true,
     // ...(tags ? { tags } : {}),
+    ...(thumbnail && { thumbnail }),
   };
 
   const contents = generateFrontMatter(frontMatter);
