@@ -19,11 +19,11 @@ const __dirname = process.cwd();
 export type FrontMatter = {
   title: string;
   description: string;
-  published?: boolean;
   category: string;
   tags?: string;
   thumbnail?: string;
   date: string;
+  draft?: boolean;
 };
 
 export const ensureDir = (fileDir: string) => fs.ensureDir(fileDir);
