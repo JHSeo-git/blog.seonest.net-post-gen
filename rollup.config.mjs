@@ -1,8 +1,10 @@
-import esbuild from 'rollup-plugin-esbuild';
 import json from '@rollup/plugin-json';
+import esbuild from 'rollup-plugin-esbuild';
 import shebang from 'rollup-plugin-preserve-shebang';
 
-const name = require('./package.json').main.replace(/\.mjs$/, '');
+import packageJson from './package.json' assert { type: 'json' };
+
+const name = packageJson.main.replace(/\.mjs$/, '');
 
 const bundle = (config) => ({
   ...config,
