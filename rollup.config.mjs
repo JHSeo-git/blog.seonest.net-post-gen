@@ -2,7 +2,7 @@ import json from '@rollup/plugin-json';
 import esbuild from 'rollup-plugin-esbuild';
 import shebang from 'rollup-plugin-preserve-shebang';
 
-import packageJson from './package.json' assert { type: 'json' };
+import packageJson from './package.json' with { type: 'json' };
 
 const name = packageJson.main.replace(/\.mjs$/, '');
 

@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-import { generator } from './generator.js';
+import { generator } from "./generator.js"
 
-generator();
+generator()

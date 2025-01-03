@@ -1,13 +1,12 @@
-import { error } from 'node:console';
-import path from 'node:path';
+import { error } from "node:console"
+import path from "node:path"
+import chalk from "chalk"
+import slugify from "cjk-slug"
+import fs from "fs-extra"
+import matter from "gray-matter"
+import inquirer from "inquirer"
 
-import chalk from 'chalk';
-import slugify from 'cjk-slug';
-import fs from 'fs-extra';
-import matter from 'gray-matter';
-import inquirer from 'inquirer';
-
-const __dirname = process.cwd();
+const __dirname = process.cwd()
 
 // title
 // description
@@ -17,173 +16,173 @@ const __dirname = process.cwd();
 // thumbnail
 // date
 export type FrontMatter = {
-  title: string;
-  description: string;
-  category: string;
-  tags?: string;
-  thumbnail?: string;
-  date: string;
-  draft?: boolean;
-};
+  title: string
+  description: string
+  category: string
+  tags?: string
+  thumbnail?: string
+  date: string
+  draft?: boolean
+}
 
-export const ensureDir = (fileDir: string) => fs.ensureDir(fileDir);
+export const ensureDir = (fileDir: string) => fs.ensureDir(fileDir)
 
-export const getSlug = (name: string) => slugify(name);
+export const getSlug = (name: string) => slugify(name)
 
 export const getPromptTitle = async (targetDir: string, category: string) => {
   const { title } = await inquirer.prompt([
     {
-      type: 'input',
-      name: 'title',
-      message: 'Please input your title',
-      default: () => 'New post title',
+      type: "input",
+      name: "title",
+      message: "Please input your title",
+      default: () => "New post title",
       validate: async (val) => {
-        if (typeof val !== 'string') {
-          return 'Title must be string';
+        if (typeof val !== "string") {
+          return "Title must be string"
         }
 
         if (val.includes("'")) {
-          return 'Cannot use single quote';
+          return "Cannot use single quote"
         }
 
-        const slug = getSlug(val);
-        const dest = `${targetDir}/${category}/${slug}.md`;
-        const destFileExists = fs.existsSync(dest);
+        const slug = getSlug(val)
+        const dest = `${targetDir}/${category}/${slug}.md`
+        const destFileExists = fs.existsSync(dest)
 
         if (destFileExists) {
-          return `Already exist file name: ${slug}.md.`;
+          return `Already exist file name: ${slug}.md.`
         }
 
-        return true;
+        return true
       },
     },
-  ]);
+  ])
 
-  return title as string;
-};
+  return title as string
+}
 
 export const getPromptDescription = async () => {
   const { description } = await inquirer.prompt([
     {
-      type: 'input',
-      name: 'description',
-      message: 'Please input your description',
-      default: () => 'New post description',
+      type: "input",
+      name: "description",
+      message: "Please input your description",
+      default: () => "New post description",
       validate: async (val) => {
-        if (typeof val !== 'string') {
-          return 'Description must be string';
+        if (typeof val !== "string") {
+          return "Description must be string"
         }
 
         if (val.includes("'")) {
-          return 'Cannot use single quote';
+          return "Cannot use single quote"
         }
-        return true;
+        return true
       },
     },
-  ]);
+  ])
 
-  return description as string;
-};
+  return description as string
+}
 
 export const getPromptCategory = async (targetDir: string) => {
-  let category: string;
-  const newCategoryOption = '[CREATE NEW CATEGORY]';
-  const categories = await getCategories(targetDir);
-  const choices = [...categories, new inquirer.Separator(), newCategoryOption];
+  let category: string
+  const newCategoryOption = "[CREATE NEW CATEGORY]"
+  const categories = await getCategories(targetDir)
+  const choices = [...categories, new inquirer.Separator(), newCategoryOption]
 
   const { selectedCategory } = await inquirer.prompt([
     {
-      type: 'list',
-      name: 'selectedCategory',
-      message: 'Please select category',
+      type: "list",
+      name: "selectedCategory",
+      message: "Please select category",
       choices,
     },
-  ]);
+  ])
 
   if (selectedCategory === newCategoryOption) {
     const { newCategory } = await inquirer.prompt([
       {
-        type: 'input',
-        name: 'newCategory',
-        message: 'Please input new category',
+        type: "input",
+        name: "newCategory",
+        message: "Please input new category",
         validate: (val) => {
-          if (typeof val !== 'string') {
-            return 'Category must be string';
+          if (typeof val !== "string") {
+            return "Category must be string"
           }
 
           if (val.includes("'")) {
-            return 'Cannot use single quote';
+            return "Cannot use single quote"
           }
 
           if (categories.includes(val)) {
-            return `Already exists category: ${val}`;
+            return `Already exists category: ${val}`
           }
 
-          return true;
+          return true
         },
       },
-    ]);
+    ])
 
-    category = newCategory;
+    category = newCategory
   } else {
-    category = selectedCategory;
+    category = selectedCategory
   }
 
-  return category;
-};
+  return category
+}
 
 export const getPromptUseAssetDir = async () => {
   const { useAssetDir } = await inquirer.prompt([
     {
-      type: 'confirm',
-      name: 'useAssetDir',
+      type: "confirm",
+      name: "useAssetDir",
       default: () => false,
-      message: 'Could you create asset(image, video, ...etc) directory?',
+      message: "Could you create asset(image, video, ...etc) directory?",
     },
-  ]);
+  ])
 
-  return useAssetDir as boolean | undefined;
-};
+  return useAssetDir as boolean | undefined
+}
 
 export const getPromptThumbnail = async () => {
   const { thumbnail } = await inquirer.prompt([
     {
-      type: 'input',
-      name: 'thumbnail',
-      message: 'Please input your thumbnail',
+      type: "input",
+      name: "thumbnail",
+      message: "Please input your thumbnail",
       validate: async (val) => {
         if (val.includes("'")) {
-          return 'Cannot use single quote';
+          return "Cannot use single quote"
         }
-        return true;
+        return true
       },
     },
-  ]);
+  ])
 
-  return thumbnail as string | undefined;
-};
+  return thumbnail as string | undefined
+}
 
 // TODO: tags
 
-export const generateFrontMatter = (contents: object) => matter.stringify('', contents);
+export const generateFrontMatter = (contents: object) => matter.stringify("", contents)
 
 export const generatePost = (filePath: string, contents: string) => {
   try {
-    fs.writeFileSync(filePath, contents);
+    fs.writeFileSync(filePath, contents)
 
-    return true;
+    return true
   } catch (err) {
-    error(`${chalk.red('Unknown Error: Cannot write file!')}\n\n${JSON.stringify(err, null, 2)}`);
-    return false;
+    error(`${chalk.red("Unknown Error: Cannot write file!")}\n\n${JSON.stringify(err, null, 2)}`)
+    return false
   }
-};
+}
 
 export const getCategories = async (targetDir: string) => {
-  const dirPath = path.resolve(__dirname, targetDir);
+  const dirPath = path.resolve(__dirname, targetDir)
 
-  await ensureDir(dirPath);
+  await ensureDir(dirPath)
 
-  const dirs = fs.readdirSync(dirPath);
+  const dirs = fs.readdirSync(dirPath)
 
-  return dirs;
-};
+  return dirs
+}
